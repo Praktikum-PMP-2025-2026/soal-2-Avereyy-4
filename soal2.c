@@ -1,33 +1,29 @@
 #include <stdio.h>
-#include <math.h>
 
 int main() {
     int N;
-    scanf("%d", &N);
+
+    if (scanf("%d", &N) != 1) return 0;
 
     int arr[N];
-
     for (int i = 0; i < N; i++) {
-        scanf("%d", &arr[i]);
+        if (scanf("%d", &arr[i]) != 1) return 0;
     }
 
     int level = 0;
     int index = 0;
 
     while (index < N) {
-        int nodes_in_level = pow(2, level);
+        int nodes = 1 << level;  // 2^level TANPA pow()
 
-        printf("LEVEL %d: ", level);
+        printf("LEVEL %d:", level);
 
-        for (int i = 0; i < nodes_in_level && index < N; i++) {
-            printf("%d", arr[index]);
+        for (int i = 0; i < nodes && index < N; i++) {
+            printf(" %d", arr[index]);
             index++;
-
-            if (i != nodes_in_level - 1 && index < N)
-                printf(" ");
         }
 
-        printf("\n");
+        if (index < N) printf("\n");  // ❗ no extra newline at end
         level++;
     }
 
